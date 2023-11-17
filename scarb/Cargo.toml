@@ -14,6 +14,7 @@ readme.workspace = true
 repository.workspace = true
 
 [dependencies]
+libloading.workspace = true
 anyhow.workspace = true
 async-trait.workspace = true
 cairo-lang-compiler.workspace = true

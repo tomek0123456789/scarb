@@ -25,6 +25,7 @@ readme = "README.md"
 repository = "https://github.com/software-mansion/scarb"
 
 [workspace.dependencies]
+libloading = "0"
 anyhow = "1"
 assert_fs = "1"
 async-trait = "0.1"
