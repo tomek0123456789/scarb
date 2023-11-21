@@ -23,6 +23,8 @@ impl Compiler for TestCompiler {
         db: &mut RootDatabase,
         ws: &Workspace<'_>,
     ) -> Result<()> {
+        dbg!("A");
+
         let target_dir = unit.target_dir(ws);
 
         let test_crate_ids = collect_main_crate_ids(&unit, db);
@@ -40,11 +42,13 @@ impl Compiler for TestCompiler {
                     .print(TypedMessage::naked_text("diagnostic", &diagnostic));
             }
         });
+        dbg!("A");
 
         diagnostics_reporter
             .with_extra_crates(&main_crate_ids)
             .ensure(db)?;
 
+        dbg!("B");
         let test_compilation = {
             let _ = trace_span!("compile_test").enter();
             compile_test_prepared_db(db, starknet, main_crate_ids, test_crate_ids)?

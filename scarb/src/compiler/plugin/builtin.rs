@@ -2,6 +2,7 @@ use anyhow::Result;
 use cairo_lang_defs::plugin::PluginSuite;
 use cairo_lang_starknet::starknet_plugin_suite;
 use std::ffi::OsString;
+use std::sync::Arc;
 // use cairo_lang_test_plugin::test_plugin_suite;
 
 use crate::compiler::plugin::{CairoPlugin, CairoPluginInstance};
@@ -30,7 +31,22 @@ impl CairoPluginInstance for BuiltinStarkNetPluginInstance {
     }
 }
 
-pub struct BuiltinTestPlugin;
+pub struct BuiltinTestPlugin{
+    lib: Arc<libloading::Library>,
+}
+
+impl BuiltinTestPlugin {
+    pub fn new() -> Self {
+        let library_path: OsString = std::env::var_os("SCARB_DYLIB").unwrap_or_else(|| {
+            OsString::from(
+                "/home/maciektr/Projects/scarb-plugins/dylib/target/debug/libplugin.so",
+            )
+        });
+        println!("loading: {}", library_path.clone().to_string_lossy().to_string());
+        let lib = unsafe { libloading::Library::new(library_path).unwrap() };
+        Self { lib: Arc::new(lib) }
+    }
+}
 
 impl CairoPlugin for BuiltinTestPlugin {
     fn id(&self) -> PackageId {
@@ -42,24 +58,12 @@ impl CairoPlugin for BuiltinTestPlugin {
     }
 
     fn instantiate(&self) -> Result<Box<dyn CairoPluginInstance>> {
-        Ok(Box::new(BuiltinTestPluginInstance::new()))
+        Ok(Box::new(BuiltinTestPluginInstance {lib: self.lib.clone()}))
     }
 }
 
 struct BuiltinTestPluginInstance {
-    lib: libloading::Library,
-}
-
-impl BuiltinTestPluginInstance {
-    pub fn new() -> Self {
-        let library_path: OsString = std::env::var_os("SCARB_DYLIB").unwrap_or_else(|| {
-            OsString::from(
-                "/Users/maciektr/Projects/scarb-plugins/dylib/target/debug/libplugin.dylib",
-            )
-        });
-        let lib = unsafe { libloading::Library::new(library_path).unwrap() };
-        Self { lib }
-    }
+        lib: Arc<libloading::Library>,
 }
 
 impl CairoPluginInstance for BuiltinTestPluginInstance {
