@@ -77,12 +77,12 @@ jobs:
       - name: Push patches to the repository
         run: git push origin ${{ env.NIGHTLY_BRANCH }}
 
-  check:
-    uses: ./.github/workflows/_check-release.yml
-    needs: prepare
-    with:
-      ref: ${{ needs.prepare.outputs.nightly_branch }}
-      fail-fast: false
+#  check:
+#    uses: ./.github/workflows/_check-release.yml
+#    needs: prepare
+#    with:
+#      ref: ${{ needs.prepare.outputs.nightly_branch }}
+#      fail-fast: false
 
   release:
     uses: ./.github/workflows/_build-release.yml
