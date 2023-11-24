@@ -218,12 +218,14 @@ impl<'t> ParallelVisitor for PathFormatter<'t> {
             return Continue;
         }
 
+        let path = path.components().collect::<PathBuf>();
+
         info!("Formatting file: {}.", path.display());
 
         let success = match &self.opts.action {
-            FmtAction::Fix => format_file_in_place(self.fmt, self.opts, self.ws, path),
-            FmtAction::Check => check_file_formatting(self.fmt, self.opts, self.ws, path),
-            FmtAction::Emit(target) => emit_formatted_file(self.fmt, target, self.ws, path),
+            FmtAction::Fix => format_file_in_place(self.fmt, self.opts, self.ws, &path),
+            FmtAction::Check => check_file_formatting(self.fmt, self.opts, self.ws, &path),
+            FmtAction::Emit(target) => emit_formatted_file(self.fmt, target, self.ws, &path),
         };
 
         if !success {
