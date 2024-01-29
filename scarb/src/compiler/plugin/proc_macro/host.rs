@@ -1,5 +1,5 @@
 use crate::compiler::plugin::proc_macro::{FromItemAst, ProcMacroInstance};
-use crate::core::Package;
+use crate::core::{Config, Package};
 use anyhow::Result;
 use cairo_lang_defs::plugin::{
     MacroPlugin, MacroPluginMetadata, PluginGeneratedFile, PluginResult,
@@ -158,11 +158,11 @@ pub struct ProcMacroHostPlugin {
 }
 
 impl ProcMacroHostPlugin {
-    pub fn register(&mut self, package: Package) -> Result<()> {
+    pub fn register(&mut self, package: Package, config: &Config) -> Result<()> {
         // Create instance
         // Register instance in hash map
         let name = package.id.name.to_smol_str();
-        let instance = ProcMacroInstance::try_new(package)?;
+        let instance = ProcMacroInstance::try_new(package, config)?;
         self.macros.insert(name, Arc::new(instance));
         Ok(())
     }
