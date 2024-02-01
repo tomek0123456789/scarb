@@ -29,22 +29,27 @@ impl FromItemAst for TokenStream {
     }
 }
 
-trait SharedLibraryProvider {
+pub trait SharedLibraryProvider {
+    fn target_path(&self, config: &Config) -> Filesystem;
     fn shared_lib_path(&self, config: &Config) -> Filesystem;
 }
 
 impl SharedLibraryProvider for Package {
-    fn shared_lib_path(&self, config: &Config) -> Filesystem {
-        let lib_name = library_filename(self.id.name.to_string());
-        let lib_name = lib_name.to_string_lossy().to_string();
+    fn target_path(&self, config: &Config) -> Filesystem {
         let ident = format!("{}-{}", self.id.name, self.id.source_id.ident());
         config
             .dirs()
             .procedural_macros_dir()
-            .child(ident)
-            .child("target")
-            .child(PROC_MACRO_BUILD_PROFILE)
-            .child(lib_name)
+            .into_child(ident)
+            .into_child("target")
+    }
+
+    fn shared_lib_path(&self, config: &Config) -> Filesystem {
+        let lib_name = library_filename(self.id.name.to_string());
+        let lib_name = lib_name.to_string_lossy().to_string();
+        self.target_path(config)
+            .into_child(PROC_MACRO_BUILD_PROFILE)
+            .into_child(lib_name)
     }
 }
 
@@ -67,7 +72,7 @@ impl ProcMacroInstance {
     /// Load shared library
     pub fn try_new(package: Package, config: &Config) -> Result<Self> {
         let lib_path = package.shared_lib_path(config);
-        let plugin = unsafe { Plugin::try_new(lib_path.path_existent()?.to_path_buf())? };
+        let plugin = unsafe { Plugin::try_new(lib_path.path_unchecked().to_path_buf())? };
         Ok(Self { plugin })
     }
 
