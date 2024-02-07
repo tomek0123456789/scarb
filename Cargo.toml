@@ -46,12 +46,15 @@ cairo-lang-semantic = { git = "https://github.com/starkware-libs/cairo", rev = "
 cairo-lang-sierra = { git = "https://github.com/starkware-libs/cairo", rev = "7bf91178ad4a775943da53f1dab94068e5d70e31" }
 cairo-lang-sierra-generator = { git = "https://github.com/starkware-libs/cairo", rev = "7bf91178ad4a775943da53f1dab94068e5d70e31" }
 cairo-lang-sierra-to-casm = { git = "https://github.com/starkware-libs/cairo", rev = "7bf91178ad4a775943da53f1dab94068e5d70e31" }
+cairo-lang-sierra-type-size = { git = "https://github.com/starkware-libs/cairo", rev = "7bf91178ad4a775943da53f1dab94068e5d70e31" }
 cairo-lang-starknet = { git = "https://github.com/starkware-libs/cairo", rev = "7bf91178ad4a775943da53f1dab94068e5d70e31" }
 cairo-lang-starknet-classes = { git = "https://github.com/starkware-libs/cairo", rev = "7bf91178ad4a775943da53f1dab94068e5d70e31" }
 cairo-lang-syntax = { git = "https://github.com/starkware-libs/cairo", rev = "7bf91178ad4a775943da53f1dab94068e5d70e31" }
 cairo-lang-test-plugin = { git = "https://github.com/starkware-libs/cairo", rev = "7bf91178ad4a775943da53f1dab94068e5d70e31" }
 cairo-lang-test-runner = { git = "https://github.com/starkware-libs/cairo", rev = "7bf91178ad4a775943da53f1dab94068e5d70e31" }
-cairo-lang-utils = { git = "https://github.com/starkware-libs/cairo", rev = "7bf91178ad4a775943da53f1dab94068e5d70e31", version = "2.5.3", features = ["env_logger"] }
+cairo-lang-utils = { git = "https://github.com/starkware-libs/cairo", rev = "7bf91178ad4a775943da53f1dab94068e5d70e31", version = "2.5.3", features = [
+    "env_logger",
+] }
 camino = { version = "1", features = ["serde1"] }
 cargo_metadata = ">=0.18"
 clap = { version = "4", features = ["derive", "env", "string"] }
@@ -66,7 +69,10 @@ dunce = "1"
 expect-test = "1.4"
 fs4 = { version = "0.7", features = ["tokio"] }
 fs_extra = "1"
-futures = { version = "0.3", default-features = false, features = ["std", "async-await"] }
+futures = { version = "0.3", default-features = false, features = [
+    "std",
+    "async-await",
+] }
 gix = ">=0.55"
 glob = "0.3"
 ignore = "0.4"
@@ -88,7 +94,13 @@ proc-macro2 = "1"
 quote = "1"
 rayon = "1.8"
 redb = "1.5"
-reqwest = { version = "0.11", features = ["gzip", "brotli", "deflate", "json", "stream"], default-features = false }
+reqwest = { version = "0.11", features = [
+    "gzip",
+    "brotli",
+    "deflate",
+    "json",
+    "stream",
+], default-features = false }
 semver = { version = "1", features = ["serde"] }
 serde = { version = "1", features = ["serde_derive"] }
 serde-untagged = "0.1"
@@ -107,7 +119,13 @@ tempfile = "3"
 test-case = "3"
 thiserror = "1"
 time = "0.3"
-tokio = { version = "1", features = ["macros", "io-util", "rt", "rt-multi-thread", "sync"] }
+tokio = { version = "1", features = [
+    "macros",
+    "io-util",
+    "rt",
+    "rt-multi-thread",
+    "sync",
+] }
 toml = "0.8"
 toml_edit = { version = "0.21", features = ["serde"] }
 tower-http = { version = "0.4", features = ["fs"] }
@@ -118,7 +136,11 @@ typed-builder = ">=0.17"
 url = { version = "2", features = ["serde"] }
 walkdir = "2"
 which = "5"
-windows-sys = { version = "0.52", features = ["Win32_Foundation", "Win32_System", "Win32_System_Console"] }
+windows-sys = { version = "0.52", features = [
+    "Win32_Foundation",
+    "Win32_System",
+    "Win32_System_Console",
+] }
 xshell = "0.2"
 xxhash-rust = { version = "0.8", features = ["xxh3"] }
 zip = { version = "0.6", default-features = false, features = ["deflate"] }
