@@ -247,7 +247,7 @@ See [the guide-level explanation](#Procedural-macro-packages-can-be-used-as-depe
 
 ### Procedural macro API in Cairo plugins
 
-- The procedural macro have to be called from Cairo code in order to be executed during the compilation. In contrast to current behaviour of Cairo plugins, no longer will they be executed on each node of AST.
+- The procedural macro has to be called from Cairo code in order to be executed during the compilation. In contrast to current behaviour of Cairo plugins, no longer will they be executed on each node of AST.
 - The procedural macro will be triggered by one of three Cairo expressions
     - Macro call, e.g. `xyz!`
     - Macro attribute, e.g. `#[xyz]`
