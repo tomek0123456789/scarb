@@ -64,7 +64,7 @@ To use a procedural macro, a Cairo programmer will have to:
 
 The overall complexity of the actual procedural macro execution should be hidden from the user abstraction level.
 Apart from requiring the Rust toolchain to be installed, the user will not have to perform any additional steps to use a procedural macro.
-In particular, this two steps can be performed without any knowledge of Rust, or even the fact that the procedural macro is implemented in Rust.
+In particular, these two steps can be performed without any knowledge of Rust, or even the fact that the procedural macro is implemented in Rust.
 Specifically, the following requirements will be met.
 
 #### Procedural macro packages can be used as dependencies
