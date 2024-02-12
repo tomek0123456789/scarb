@@ -1,7 +1,7 @@
 //! Scarb is the build tool and package manager for the [Cairo] programming language.
 //!
 //! [cairo]: https://cairo-lang.org/
-
+// test add comment
 #![deny(clippy::dbg_macro)]
 #![deny(clippy::disallowed_methods)]
 #![deny(rustdoc::broken_intra_doc_links)]
