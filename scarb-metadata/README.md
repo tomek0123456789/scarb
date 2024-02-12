@@ -1,5 +1,7 @@
 # `scarb-metadata`
 
+
+readme change
 This crate provides structured access to the output of `scarb metadata` command.
 [Scarb](https://docs.swmansion.com/scarb) is a build toolchain and package manager for
 the [Cairo language](https://www.cairo-lang.org/).
